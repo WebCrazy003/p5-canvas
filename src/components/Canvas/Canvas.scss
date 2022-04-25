@@ -1,0 +1,25 @@
+.container {
+  height: 100%;
+}
+.canvas {
+  height: 97%;
+  min-height: 400px
+}
+.controls {
+  display: flex;
+  justify-content: space-evenly;
+  height: 2em;
+  margin-top: .5em;
+  .clear-btn {
+    font-size: .5em;
+  }
+  .play-btn {
+    position: relative;
+    top: -2em;
+    width: 4em;
+    overflow: visible;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+}
