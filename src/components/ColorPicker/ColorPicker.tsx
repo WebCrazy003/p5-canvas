@@ -1,7 +1,8 @@
 import React from "react"
-import "./ColorPicker"
 import { Slider } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
+
+import "./ColorPicker"
 
 const RedSlider = withStyles({
     root: {
@@ -30,14 +31,20 @@ const BlueSlider = withStyles({
     }
 })(Slider)
 
-const ColorPicker = ({red, green, blue, handleChange}) => {
+interface ColorPickerProps {
+    red: number;
+    green: number;
+    blue: number;
+    handleChange: (color: string, v: number | number[]) => void;
+}
+
+const ColorPicker = ({red, green, blue, handleChange}: ColorPickerProps) => {
     return (
         <>
             <RedSlider 
                 value={red}
                 min={0}
                 max={255}
-                lable="Red" 
                 valueLabelDisplay='auto'
                 onChange={(e,v) => handleChange("red", v)} />
             <GreenSlider 
@@ -45,14 +52,12 @@ const ColorPicker = ({red, green, blue, handleChange}) => {
                 min={0}
                 max={255}
                 valueLabelDisplay='auto'
-                label="Green" 
                 onChange={(e,v) => handleChange("green", v)} />
             <BlueSlider 
                 value={blue}
                 min={0}
                 max={255}
                 valueLabelDisplay='auto'
-                label="Blue" 
                 onChange={(e,v) => handleChange("blue", v)} />
         </>
     )

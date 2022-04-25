@@ -1,29 +1,31 @@
-class P5ReactAdapter {
+import p5 from 'p5'
 
-    // Frequency takes in either 'treble', 'bass', or 'mid' as strings and the frequencyMapping parameter is supposed to be assigned the corresponding frequency mapping to sync with the music
-    static readFrequencyShapes(array, frequency, frequencyMapping, p5) {
+import { BASE_RADIUS } from './initialData'
+import { ShapeType } from '../types/store'
+
+class CanvasAdapter {
+
+    static readShapes(array: ShapeType[], p5: p5) { 
         for (let i = 0; i < array.length; i++) {
-            if (array[i].frequency === frequency) {
-                    P5ReactAdapter.readJsonShape(array[i], frequencyMapping, p5)
-            }
+            CanvasAdapter.readJsonShape(array[i], p5)
         }
     }
 
-    static readJsonShape(json, frequencyMapping, p) {
+    static readJsonShape(json: any, p: p5) {
         p.push()
 
         p.fill(`rgb(${json.fill})`)
         p.stroke(`rgb(${json.stroke})`)
 
-        const { width, height, amount, spin, orbit, shape, stagger_radius, stagger_place } = json
-        const radius = frequencyMapping + stagger_radius
+        const { width, height, amount, spin, orbit, shape } = json
+        const radius = BASE_RADIUS
         p.rotate(orbit * p.frameCount/10)
         switch (shape) {
             case "rect":
                 //This will allow the shape to rotate around its own axis
                 for (let i = 0; i < amount; i++) {
                     p.push()
-                        p.rotate((360/amount) * i + stagger_place)
+                        p.rotate((360/amount) * i)
                         p.push()
                             p.translate(radius, radius)
                             p.rotate(spin * p.frameCount/10)
@@ -36,7 +38,7 @@ class P5ReactAdapter {
             case "ellipse":
                 for (let i = 0; i < amount; i++) {
                     p.push()
-                        p.rotate((360/amount)*i + stagger_place)
+                        p.rotate((360/amount)*i)
                         p.push()
                             p.translate(radius, radius)
                             p.rotate(spin * p.frameCount/10)
@@ -49,7 +51,7 @@ class P5ReactAdapter {
             case "triangle":
                 for (let i = 0; i < amount; i++) {
                     p.push()
-                        p.rotate((360/amount)*i + stagger_place)
+                        p.rotate((360/amount)*i)
                         p.push()
                             const center = 2 * height/3
                             p.translate(radius, radius)
@@ -62,7 +64,7 @@ class P5ReactAdapter {
             case "line":
                 for (let i = 0; i < amount; i++) {
                     p.push()
-                        p.rotate((360/amount)*i + stagger_place)
+                        p.rotate((360/amount)*i)
                         p.push()
                             p.translate(radius, radius)
                             p.rotate(spin * p.frameCount/10)
@@ -77,4 +79,4 @@ class P5ReactAdapter {
     }
 }
 
-export default P5ReactAdapter
+export default CanvasAdapter
