@@ -1,19 +1,22 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Installation
+## Used Libraries
+React
+Redux
+P5
 
-After you've followed the [backend instructions]
+## Installation
 
 cd into the proper frontend directory and install the node packages
 
 ```bash
-npm i
+yarn
 ```
 
-Next you load up the frontend server with:
+Next you load up the server with:
 
 ```bash
-npm start
+yarn start
 ```
 
 ## Contributing
